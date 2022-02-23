@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import AppComponent from "./App";
 
 function App() {
-  return (
-    <div>
-      <div>Hello world from React</div>
-    </div>
-  );
+  return <AppComponent />;
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
