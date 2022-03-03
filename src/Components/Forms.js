@@ -2,11 +2,24 @@ import React from "react";
 import memeData from "../memeData";
 
 export default function Forms() {
-  const [memeImage, setMemeImage] = React.useState(""); // useState with empthy string
+  // const [memeImage, setMemeImage] = React.useState(""); // useState with empthy string
+
+  const [meme, setMeme] = React.useState({
+    topText: "",
+    bottomText: "",
+    randomImage: "",
+  }); // object state for text and img
+
+  const [allMemeImages, setAllMemeImages] = React.useState(memeData);
+
   function getMemeImg() {
-    const memeArray = memeData.data.memes; //getting the meme data that we need from "API"
+    const memeArray = allMemeImages.data.memes; //getting the meme data that we need from "API"
     const randomNumber = Math.floor(Math.random() * memeArray.length); // random number
-    setMemeImage(memeArray[randomNumber].url); //setting the new state
+    const url = memeArray[randomNumber].url;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      randomImage: url,
+    })); //setting the new state
   }
   return (
     <main>
@@ -14,14 +27,12 @@ export default function Forms() {
         <div className="flex flex-col gap-8 w-[450px]">
           <div className="flex flex-row gap-5 ">
             <input
-              type="text"
               className="border-2 border-stone-400/50 rounded 
                    caret-stone-400/50 focus:outline-stone-400/80 
                      py-2 px-3 w-[215px]"
               placeholder="Insert first text"
             ></input>
             <input
-              type="text"
               className="border-2 border-stone-400/50 rounded 
                    caret-stone-400/50 focus:outline-stone-400/80 
                      py-2 px-3 w-[215px]"
@@ -37,7 +48,7 @@ export default function Forms() {
             Get a new meme image 🖼
           </button>
           {/*clicking we will call getMemeImg and will update the state to the new one, makeing the img appear*/}
-          <img src={memeImage} className="h-auto" />
+          <img src={meme.randomImage} className="h-auto" />
           {/*don't use alt values because we need nothing to be there at the beginning*/}
         </div>
       </div>
