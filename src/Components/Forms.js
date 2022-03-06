@@ -19,7 +19,7 @@ export default function Forms() {
     setMeme((prevMeme) => ({
       ...prevMeme,
       randomImage: url,
-    })); //setting the new state
+    })); //setting the new state of our object
   }
   return (
     <main>
