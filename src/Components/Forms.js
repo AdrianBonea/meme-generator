@@ -9,6 +9,15 @@ export default function Forms() {
     bottomText: "",
     randomImage: "",
   }); // object state for text and img
+  console.log(meme);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      [name]: value,
+    })); //handle the text changes instantlly
+  }
 
   const [allMemeImages, setAllMemeImages] = React.useState(memeData);
 
@@ -24,20 +33,26 @@ export default function Forms() {
   return (
     <main>
       <div className="absolute top-[150px] left-16">
-        <div className="flex flex-col gap-8 w-[450px]">
+        <form className="flex flex-col gap-8 w-[450px]">
           <div className="flex flex-row gap-5 ">
             <input
               className="border-2 border-stone-400/50 rounded 
                    caret-stone-400/50 focus:outline-stone-400/80 
                      py-2 px-3 w-[215px]"
               placeholder="Insert first text"
-            ></input>
+              name="topText"
+              value={meme.topText}
+              onChange={handleChange}
+            />
             <input
               className="border-2 border-stone-400/50 rounded 
                    caret-stone-400/50 focus:outline-stone-400/80 
                      py-2 px-3 w-[215px]"
               placeholder="Insert second text"
-            ></input>
+              name="bottomText"
+              value={meme.bottomText}
+              onChange={handleChange}
+            />
           </div>
           <button
             type="button"
@@ -48,8 +63,18 @@ export default function Forms() {
             Get a new meme image 🖼
           </button>
           {/*clicking we will call getMemeImg and will update the state to the new one, makeing the img appear*/}
-          <img src={meme.randomImage} className="h-auto" />
-          {/*don't use alt values because we need nothing to be there at the beginning*/}
+        </form>
+        <div className="grid justify-items-center text-orange-900	font-bold text-3xl relative my-10">
+          <img
+            src={meme.randomImage}
+            className="absolute z-0 rounded h-[450px] object-cover "
+          />
+          <h2 className="z-10 absolute top-[10px] drop-shadow-xl">
+            {meme.topText}
+          </h2>
+          <h2 className="z-0 absolute top-[400px] drop-shadow-xl">
+            {meme.bottomText}
+          </h2>
         </div>
       </div>
     </main>
