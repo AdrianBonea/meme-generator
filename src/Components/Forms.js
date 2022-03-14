@@ -1,5 +1,4 @@
 import React from "react";
-import memeData from "../memeData";
 
 export default function Forms() {
   // const [memeImage, setMemeImage] = React.useState(""); // useState with empthy string
@@ -9,7 +8,6 @@ export default function Forms() {
     bottomText: "",
     randomImage: "",
   }); // object state for text and img
-  console.log(meme);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -19,10 +17,16 @@ export default function Forms() {
     })); //handle the text changes instantlly
   }
 
-  const [allMemeImages, setAllMemeImages] = React.useState(memeData);
+  const [allMemes, setAllMeme] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => setAllMeme(data.data.memes));
+  }, []);
 
   function getMemeImg() {
-    const memeArray = allMemeImages.data.memes; //getting the meme data that we need from "API"
+    const memeArray = allMemes; //getting the meme data that we need from API
     const randomNumber = Math.floor(Math.random() * memeArray.length); // random number
     const url = memeArray[randomNumber].url;
     setMeme((prevMeme) => ({
