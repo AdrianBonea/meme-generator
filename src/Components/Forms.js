@@ -6,7 +6,7 @@ export default function Forms() {
   const [meme, setMeme] = React.useState({
     topText: "",
     bottomText: "",
-    randomImage: "",
+    randomImage: "https://i.imgflip.com/30b1gx.jpg",
   }); // object state for text and img
 
   function handleChange(event) {
@@ -72,7 +72,6 @@ export default function Forms() {
           <img
             src={meme.randomImage}
             className="absolute z-0 rounded h-[450px] object-cover "
-            alt=" "
           />
           <h2 className="z-10 absolute top-[10px] drop-shadow-xl">
             {meme.topText}
