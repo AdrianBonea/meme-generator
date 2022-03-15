@@ -72,6 +72,7 @@ export default function Forms() {
           <img
             src={meme.randomImage}
             className="absolute z-0 rounded h-[450px] object-cover "
+            alt=" "
           />
           <h2 className="z-10 absolute top-[10px] drop-shadow-xl">
             {meme.topText}
